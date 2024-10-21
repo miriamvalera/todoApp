@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import Item from "./Item";
+import "@fontsource/abril-fatface";
 
 function App() {
   const [items, setItems] = useState([]);
@@ -16,7 +17,15 @@ function App() {
   }, [items]);
 
   function handleName(e) {
-    setValue(e.target.value);
+    const name = e?.target?.value;
+    setValue(name);
+    if (name.trim().length === 0) {
+      return setShowItems(items.filter((item) => !item.done));
+    }
+    const filteredItems = items.filter((item) =>
+      item.name.toLowerCase().startsWith(name.toLowerCase())
+    );
+    setShowItems(filteredItems);
   }
   async function loadItems() {
     const res = await fetch("https://api.casa.full4media.com/api/v1/todo");
@@ -132,12 +141,13 @@ function App() {
       <div>
         <section className="todoapp">
           <header className="header">
-            <h1>Lista compra</h1>
+            <h1>Lista de la compra</h1>
             <input
               id="new-todo-input"
               className="new-todo"
               placeholder="¿Qué falta?"
               autoFocus=""
+              autoComplete="off"
               onKeyUp={handleAddItems}
               onChange={handleName}
               value={value}

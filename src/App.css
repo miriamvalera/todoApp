@@ -68,15 +68,24 @@ body {
 
 .todoapp h1 {
   position: absolute;
-  top: -140px;
+  top: -110px;
   width: 100%;
-  font-size: 80px;
+  font-family: "Arial";
+  /* font-size: 55px; */
+  font-size: 3vw;
   font-weight: 200;
   text-align: center;
-  color: #b83f45;
+  color: #3fb89c;
+  font-family: "Abril Fatface", system-ui;
   -webkit-text-rendering: optimizeLegibility;
   -moz-text-rendering: optimizeLegibility;
   text-rendering: optimizeLegibility;
+}
+
+@media (max-width: 768px) {
+  .todoapp h1 {
+    font-size: 10vw;
+  }
 }
 
 .new-todo,
