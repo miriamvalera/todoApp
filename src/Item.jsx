@@ -13,6 +13,7 @@ export default function Item({
           className="toggle"
           type="checkbox"
           onClick={() => handleToggleItem(id)}
+          onKeyDown={() => handleToggleItem(id)}
         />
         <label>{name}</label>
         <button
