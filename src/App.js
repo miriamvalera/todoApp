@@ -141,7 +141,15 @@ function App() {
       <div>
         <section className="todoapp">
           <header className="header">
-            <h1>Lista de la compra</h1>
+            <h1>
+              Lista de la compra
+              <small
+                style={{ fontSize: "0.5em", marginLeft: "10px", color: "#888" }}
+              >
+                v0.1.2
+              </small>
+            </h1>
+
             <input
               id="new-todo-input"
               className="new-todo"

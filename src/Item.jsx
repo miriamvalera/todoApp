@@ -12,8 +12,9 @@ export default function Item({
         <input
           className="toggle"
           type="checkbox"
-          onClick={() => handleToggleItem(id)}
-          onKeyDown={() => handleToggleItem(id)}
+          checked={done}
+          onChange={() => handleToggleItem(id)}
+          onTouchStart={() => handleToggleItem(id)}
         />
         <label>{name}</label>
         <button
