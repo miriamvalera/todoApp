@@ -10,6 +10,7 @@ function App() {
 
   useEffect(() => {
     loadItems();
+    handleWebSocket();
   }, []);
 
   useEffect(() => {
@@ -132,10 +133,45 @@ function App() {
     } else {
       await markDone(id);
     }
-
     await loadItems();
+    setValue("");
   }
 
+  async function handleWebSocket() {
+    // Crear una conexión WebSocket
+    const socket = new WebSocket("ws://api.casa.full4media.com/ws/todos");
+
+    // Evento que se dispara cuando la conexión se abre
+    socket.onopen = function (event) {
+      console.log("Conexión WebSocket establecida.");
+      // Puedes enviar un mensaje al servidor si es necesario
+      socket.send(
+        JSON.stringify({
+          action: "create",
+          todo: {
+            name: "Comprar leche",
+            done: false,
+          },
+        })
+      );
+    };
+
+    // Evento que se dispara cuando llega un mensaje del servidor
+    socket.onmessage = function (event) {
+      console.log("Mensaje recibido del servidor:", event.data);
+      // Aquí puedes procesar los datos recibidos del WebSocket
+    };
+
+    // Evento que se dispara cuando la conexión se cierra
+    socket.onclose = function (event) {
+      console.log("Conexión WebSocket cerrada.");
+    };
+
+    // Evento que se dispara cuando ocurre un error en la conexión
+    socket.onerror = function (error) {
+      console.error("Error en la conexión WebSocket:", error);
+    };
+  }
   return (
     <div className="App">
       <div>
@@ -146,7 +182,7 @@ function App() {
               <small
                 style={{ fontSize: "0.5em", marginLeft: "10px", color: "#888" }}
               >
-                v0.1.2
+                v0.1.6
               </small>
             </h1>
 

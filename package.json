@@ -1,6 +1,6 @@
 {
   "name": "todo-app",
-  "version": "0.1.2",
+  "version": "0.1.6",
   "private": true,
   "dependencies": {
     "@fontsource/abril-fatface": "^5.1.0",
